@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: simo
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: JWT_SECRET
+        generateValue: true
+      # 0 = production (SMS reel obligatoire). Mettre 1 UNIQUEMENT pour tester.
+      - key: DEV_OTP
+        value: "0"
+      - key: DATABASE_SSL
+        value: "1"
+      - key: DATABASE_URL
+        sync: false
+      # Numero de l'administrateur (ex: 0612345678)
+      - key: ADMIN_PHONE
+        sync: false
+      # SMS Twilio
+      - key: TWILIO_SID
+        sync: false
+      - key: TWILIO_TOKEN
+        sync: false
+      - key: TWILIO_FROM
+        sync: false
